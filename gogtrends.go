@@ -22,8 +22,10 @@ func TrendsCategories() map[string]string {
 }
 
 // Daily gets daily trends descending ordered by days and articles corresponding to it.
-func Daily(ctx context.Context, hl, loc string) ([]*TrendingSearch, error) {
-	data, err := client.trends(ctx, gAPI+gDaily, hl, loc)
+func Daily(ctx context.Context, hl, loc, targetDate string) ([]*TrendingSearch, error) {
+	ed := map[string]string{"ed": targetDate}
+
+	data, err := client.trends(ctx, gAPI+gDaily, hl, loc, ed)
 	if err != nil {
 		return nil, err
 	}
