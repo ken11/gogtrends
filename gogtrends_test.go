@@ -30,7 +30,7 @@ func TestDailyTrending(t *testing.T) {
 
 	resp, err := Daily(context.Background(), langEN, locUS)
 	assert.NoError(t, err)
-	assert.True(t, len(resp[0].Title.Query) > 0)
+	assert.True(t, len(resp[0].Searches[0].Title.Query) > 0)
 }
 
 func TestRealtimeTrending(t *testing.T) {
