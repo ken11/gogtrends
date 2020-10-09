@@ -22,7 +22,7 @@ func TrendsCategories() map[string]string {
 }
 
 // Daily gets daily trends descending ordered by days and articles corresponding to it.
-func Daily(ctx context.Context, hl, loc, targetDate string) ([]*TrendingSearch, error) {
+func Daily(ctx context.Context, hl, loc, targetDate string) ([]*TrendingSearchDays, error) {
 	ed := map[string]string{"ed": targetDate}
 
 	data, err := client.trends(ctx, gAPI+gDaily, hl, loc, ed)
@@ -38,13 +38,7 @@ func Daily(ctx context.Context, hl, loc, targetDate string) ([]*TrendingSearch, 
 		return nil, err
 	}
 
-	// split searches by days together
-	searches := make([]*TrendingSearch, 0)
-	for _, v := range out.Default.Searches {
-		searches = append(searches, v.Searches...)
-	}
-
-	return searches, nil
+	return out.Default.Searches, nil
 }
 
 // Realtime represents realtime trends with included articles and sources.
